@@ -41,21 +41,28 @@ function updateCharacter() {
   window.writer = writer;
 }
 
+function updateCharacterAndQuize() {
+  updateCharacter();
+  writer.quiz({
+    showOutline: true,
+  });
+}
+
 function nextCharacter() {
   currentCharacter = (currentCharacter + 1) % allCharacters.length;
   document.querySelector('.js-char').value = allCharacters[currentCharacter];
-  updateCharacter();
+  updateCharacterAndQuize();
 }
 
 function prevCharacter() {
   currentCharacter = (currentCharacter - 1 + allCharacters.length) % allCharacters.length;
   document.querySelector('.js-char').value = allCharacters[currentCharacter];
-  updateCharacter();
+  updateCharacterAndQuize();
 }
 
 function randomCharacter() {
   document.querySelector('.js-char').value = allCharacters[Math.floor(Math.random() * allCharacters.length)];
-  updateCharacter();
+  updateCharacterAndQuize();
 }
 
 window.onload = function () {
@@ -65,6 +72,10 @@ window.onload = function () {
   }
 
   updateCharacter();
+
+  writer.quiz({
+    showOutline: true,
+  });
 
   document.querySelector('.js-char-form').addEventListener('submit', function (evt) {
     evt.preventDefault();
