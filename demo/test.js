@@ -2,7 +2,7 @@ var writer;
 var isCharVisible;
 var isOutlineVisible;
 
-let allCharacters = ["我","口","耳","一","张","笑","脸","眼","鼻","变","绿","黄","红","蓝","紫"
+var allCharacters = ["我","口","耳","一","张","笑","脸","眼","鼻","变","绿","黄","红","蓝","紫"
   ,"五","六","比","我","你","高","快","大","长","亮","就","是","图","书","馆","门","架","沙","发"
   ,"故","事","爱","跳","舞","兔","只","两","三","四","在","子","家","影","短","不","见","了","去"
   ,"哪","儿","脚","下","回","来","小","猫","钓","老","鼠","看","听","闻","咬","跑","好","啦","的"
@@ -15,7 +15,7 @@ let allCharacters = ["我","口","耳","一","张","笑","脸","眼","鼻","变"
   ,"穿","干","浇","拿","难","扫","伤","勺","双","心","衣","拔","萝","卜","个","爷","奶","狗","都"
   ,"真","里","也","出","神","奇","形","狐","狸","哈","方","象","进","梯","哎","呀","起","游","泳"
   ,"热","夏","清","凉","池","水","戴","帽","圈","乐"];
-let currentCharacter = 0;
+var currentCharacter = 0;
 
 function printStrokePoints(data) {
   var pointStrs = data.drawnPath.points.map((point) => `{x: ${point.x}, y: ${point.y}}`);
@@ -41,11 +41,22 @@ function updateCharacter() {
   window.writer = writer;
 }
 
-function updateCharacterAndQuize() {
-  updateCharacter();
+function quizWithComplete() {
   writer.quiz({
     showOutline: true,
+    onComplete: function () {
+      // do something when quiz is complete
+      console.log('Quiz complete!');
+      // play a congrates audio
+      var audio = new Audio('BiaoYangNi.mp3');
+      audio.play();
+    },
   });
+}
+
+function updateCharacterAndQuize() {
+  updateCharacter();
+  quizWithComplete();
 }
 
 function nextCharacter() {
@@ -72,10 +83,7 @@ window.onload = function () {
   }
 
   updateCharacter();
-
-  writer.quiz({
-    showOutline: true,
-  });
+  quizWithComplete();
 
   document.querySelector('.js-char-form').addEventListener('submit', function (evt) {
     evt.preventDefault();
@@ -93,11 +101,7 @@ window.onload = function () {
   document.querySelector('.js-animate').addEventListener('click', function () {
     writer.animateCharacter();
   });
-  document.querySelector('.js-quiz').addEventListener('click', function () {
-    writer.quiz({
-      showOutline: true,
-    });
-  });
+  document.querySelector('.js-quiz').addEventListener('click', quizWithComplete);
   document.querySelector('.js-next').addEventListener('click', nextCharacter);
   document.querySelector('.js-prev').addEventListener('click', prevCharacter);
   document.querySelector('.js-random').addEventListener('click', randomCharacter);
