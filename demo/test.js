@@ -91,13 +91,6 @@ function updateCharacterAndQuize() {
   // save currentLevel and currentCharacter to cookie
   setCookie('currentLevel', currentLevel, null);
   setCookie('currentCharacter', currentCharacter, null);
-
-  // // save currentLevel and currentCharacter to local storage
-  // localStorage.setItem('currentLevel', currentLevel);
-  // localStorage.setItem('currentCharacter', currentCharacter);
-
-  // let temp = localStorage.getItem('currentCharacter') || 0;
-  // console.log('save currentCharacter: ' + temp);
 }
 
 function nextCharacter() {
@@ -127,9 +120,9 @@ function randomCharacter() {
   updateCharacterAndQuize();
 }
 
-function changeLevel(level) {
+function changeLevel(level, characterIndex) {
   currentLevel = level;
-  currentCharacter = 0;
+  currentCharacter = characterIndex;
   let curLevelAllChars = allCharacters[currentLevel];
   document.querySelector('.js-char').value = curLevelAllChars[currentCharacter];
   updateCharacterAndQuize();
@@ -140,7 +133,6 @@ function changeLevel(level) {
   }
 
   document.querySelector('#allCharactersCurrentLevel').innerHTML = htmlStr;
-
 }
 
 window.onload = function () {
@@ -155,13 +147,7 @@ window.onload = function () {
   currentLevel = getCookie('currentLevel') || 0;
   currentCharacter = getCookie('currentCharacter') || 0;
 
-  // load currentLevel and currentCharacter from local storage
-  // currentLevel = localStorage.getItem('currentLevel') || 0;
-  // currentCharacter = localStorage.getItem('currentCharacter') || 0;
-
-  console.log('load currentCharacter: ' + currentCharacter);
-
-  changeLevel(currentLevel);
+  changeLevel(currentLevel, currentCharacter);
 
   document.querySelector('.js-char-form').addEventListener('submit', function (evt) {
     evt.preventDefault();
@@ -184,15 +170,15 @@ window.onload = function () {
   document.querySelector('.js-prev').addEventListener('click', prevCharacter);
   document.querySelector('.js-random').addEventListener('click', randomCharacter);
   document.querySelector('.js-level1').addEventListener('click', function () {
-    changeLevel(0);
+    changeLevel(0, 0);
   })
   document.querySelector('.js-level2').addEventListener('click', function () {
-    changeLevel(1);
+    changeLevel(1, 0);
   })
   document.querySelector('.js-level3').addEventListener('click', function () {
-    changeLevel(2);
+    changeLevel(2, 0);
   })
   document.querySelector('.js-level4').addEventListener('click', function () {
-    changeLevel(3);
+    changeLevel(3, 0);
   })
 };
