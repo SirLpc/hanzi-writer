@@ -76,7 +76,7 @@ function updateCharacterAndQuize() {
   localStorage.setItem('currentCharacter', currentCharacter);
 
   let temp = localStorage.getItem('currentCharacter') || 0;
-  console.log('currentCharacter: ' + temp);
+  console.log('save currentCharacter: ' + temp);
 }
 
 function nextCharacter() {
@@ -133,6 +133,9 @@ window.onload = function () {
   // load currentLevel and currentCharacter from local storage
   currentLevel = localStorage.getItem('currentLevel') || 0;
   currentCharacter = localStorage.getItem('currentCharacter') || 0;
+
+  console.log('load currentCharacter: ' + currentCharacter);
+
   changeLevel(currentLevel);
 
   document.querySelector('.js-char-form').addEventListener('submit', function (evt) {
