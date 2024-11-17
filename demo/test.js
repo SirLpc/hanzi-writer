@@ -67,16 +67,37 @@ function quizWithComplete() {
   });
 }
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function setCookie(name, value, days) {
+  let expires = "";
+  if (days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    expires = "; expires=" + date.toUTCString();
+    console.log(expires);
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
 function updateCharacterAndQuize() {
   updateCharacter();
   quizWithComplete();
 
-  // save currentLevel and currentCharacter to local storage
-  localStorage.setItem('currentLevel', currentLevel);
-  localStorage.setItem('currentCharacter', currentCharacter);
+  // save currentLevel and currentCharacter to cookie
+  setCookie('currentLevel', currentLevel, null);
+  setCookie('currentCharacter', currentCharacter, null);
 
-  let temp = localStorage.getItem('currentCharacter') || 0;
-  console.log('save currentCharacter: ' + temp);
+  // // save currentLevel and currentCharacter to local storage
+  // localStorage.setItem('currentLevel', currentLevel);
+  // localStorage.setItem('currentCharacter', currentCharacter);
+
+  // let temp = localStorage.getItem('currentCharacter') || 0;
+  // console.log('save currentCharacter: ' + temp);
 }
 
 function nextCharacter() {
@@ -130,9 +151,13 @@ window.onload = function () {
   // updateCharacter();
   // quizWithComplete();
 
+  // load currentLevel and currentCharacter to cookie
+  currentLevel = getCookie('currentLevel') || 0;
+  currentCharacter = getCookie('currentCharacter') || 0;
+
   // load currentLevel and currentCharacter from local storage
-  currentLevel = localStorage.getItem('currentLevel') || 0;
-  currentCharacter = localStorage.getItem('currentCharacter') || 0;
+  // currentLevel = localStorage.getItem('currentLevel') || 0;
+  // currentCharacter = localStorage.getItem('currentCharacter') || 0;
 
   console.log('load currentCharacter: ' + currentCharacter);
 
