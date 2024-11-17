@@ -74,6 +74,9 @@ function updateCharacterAndQuize() {
   // save currentLevel and currentCharacter to local storage
   localStorage.setItem('currentLevel', currentLevel);
   localStorage.setItem('currentCharacter', currentCharacter);
+
+  let temp = localStorage.getItem('currentCharacter') || 0;
+  console.log('currentCharacter: ' + temp);
 }
 
 function nextCharacter() {
