@@ -121,9 +121,11 @@ function randomCharacter() {
 }
 
 function changeLevel(level, characterIndex) {
-  currentLevel = level;
-  currentCharacter = characterIndex;
+  // clamp the level to 0 to allcahracters array length
+  currentLevel = Math.max(0, Math.min(level, allCharacters.length - 1));
   let curLevelAllChars = allCharacters[currentLevel];
+  currentCharacter = Math.max(0, Math.min(characterIndex, curLevelAllChars.length - 1));
+
   document.querySelector('.js-char').value = curLevelAllChars[currentCharacter];
   updateCharacterAndQuize();
 
