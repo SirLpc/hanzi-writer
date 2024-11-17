@@ -70,9 +70,24 @@ button, #target {
 	float: left;
 	margin-right: 4px;
 	margin-bottom: 4px;
+	font-size: 18px;
 }
 .actions button:last-child {
 	margin-right: 0;
+}
+
+.allChars {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.allChars button {
+	display: block;
+	width: 40px;
+	float: left;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	font-size: 18px;
 }
 
 button {
