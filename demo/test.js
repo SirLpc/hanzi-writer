@@ -68,9 +68,9 @@ function quizWithComplete() {
       }).then(() => nextCharacter());
 
       // delay for 0.5 second and show the next character
-      setTimeout(function () {
-        nextCharacter();
-      }, 500);
+      // setTimeout(function () {
+      //   nextCharacter();
+      // }, 500);
     },
   });
 }
