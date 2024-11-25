@@ -76,6 +76,22 @@ button, #target {
 	margin-right: 0;
 }
 
+.actionsTier {
+	width: 400px;
+	margin: 0 auto;
+}
+.actionsTier button {
+	display: block;
+	width: 70px;
+	float: left;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	font-size: 18px;
+}
+.actionsTier button:last-child {
+	margin-right: 0;
+}
+
 .allChars {
 	width: 400px;
 	margin: 0 auto;
